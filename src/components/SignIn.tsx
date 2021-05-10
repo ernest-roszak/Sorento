@@ -31,7 +31,9 @@ function SingIn() {
         placeholder="password"
         onChange={(e) => setPassword(e.target.value)}
       ></input>
-      <Button type="submit">Submit</Button>
+      <Button isBig={false} type="submit">
+        Submit
+      </Button>
     </form>
   );
 }
