@@ -1,10 +1,18 @@
+import Banner from 'components/atoms/Banner/Banner';
+import LoginBar from 'components/organisms/LoginBar/LoginBar';
+import Navigation from 'components/organisms/Navigation/Navigation';
 import React from 'react';
 
-const MainTemplate = () => {
+import { Wrapper } from './MainTemplate.styles';
+
+const MainTemplate = ({ children }: any) => {
   return (
-    <div>
-      <p>hello world</p>
-    </div>
+    <Wrapper>
+      <LoginBar />
+      <Banner />
+      <Navigation />
+      {children}
+    </Wrapper>
   );
 };
 

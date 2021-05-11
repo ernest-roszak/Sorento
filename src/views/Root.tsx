@@ -3,11 +3,12 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'assets/styles/globalStyles';
 import { theme } from 'assets/styles/theme';
 import { auth } from '../firebase';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from 'components/Dashboard';
-import SingIn from 'components/SignIn';
+import SingIn from 'components/molecules/SignIn/SignIn';
 import firebase from 'firebase';
 import PrivateRoute from 'components/PrivateRoute';
+import MainTemplate from 'components/templates/MainTemplate/MainTemplate';
 
 function Root() {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
@@ -25,24 +26,14 @@ function Root() {
     <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/login">Sign in</Link>
-              </li>
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-            </ul>
-          </nav>
+        <MainTemplate>
           <Switch>
             <Route path="/login">
               <SingIn />
             </Route>
             <PrivateRoute currentUser={currentUser} component={Dashboard} path="/dashboard" />
           </Switch>
-        </div>
+        </MainTemplate>
       </ThemeProvider>
     </Router>
   );
