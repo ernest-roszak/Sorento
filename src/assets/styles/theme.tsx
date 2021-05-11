@@ -3,6 +3,7 @@ import { DefaultTheme } from 'styled-components';
 export const theme: DefaultTheme = {
   colors: {
     white: '#FFFFFF',
+    white2: '#FEFEFE',
     lightGrey: '#F7F8FA',
     grey: '#C0C7D6',
     darkGrey: '#737C8E',
@@ -12,6 +13,7 @@ export const theme: DefaultTheme = {
     warning: '#E1D888',
     darkPurple: '#C0C7D6',
     lightPurple: '#ECEFF7',
+    green: '#AEB127',
   },
   fontSize: {
     xl: '24px',

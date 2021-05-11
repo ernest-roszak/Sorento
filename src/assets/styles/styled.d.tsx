@@ -6,6 +6,7 @@
 export interface DefaultTheme {
   colors: {
     white: string;
+    white2: string;
     lightGrey: string;
     grey: string;
     darkGrey: string;
@@ -15,6 +16,7 @@ export interface DefaultTheme {
     warning: string;
     darkPurple: string;
     lightPurple: string;
+    green: string;
   };
   fontSize: {
     xl: string;
