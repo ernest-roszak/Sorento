@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   background: ${({ theme }) => theme.colors.black};
-  height: 80px;
+  height: 85px;
   width: 100%;
   overflow-x: scroll;
   display: flex;

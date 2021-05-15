@@ -1,14 +1,14 @@
-import { Button } from 'components/atoms/Button/Button';
 import React, { useState } from 'react';
 import { auth } from '../../../firebase';
-import FormField from 'components/molecules/FormField/FormField';
 import { Wrapper, StyledLink } from './SingIn.styles';
+import SideBar from 'views/SideBar/SideBar';
+import QuickLogin from '../QucikLogin/QuickLogin';
 
 function login(email: string, password: string) {
   return auth.signInWithEmailAndPassword(email, password);
 }
 
-export type FormFieldProps = {
+export interface FormFieldProps {
   name: string;
   id: string;
   value: string;
@@ -17,13 +17,14 @@ export type FormFieldProps = {
   onChange: any;
   htmlFor: string;
   label: string;
-};
+}
 
 function SingIn() {
   const [loginValues, setLoginValues] = useState({
     email: 'test@gmail.com',
     password: 'test123',
   });
+  const [openSideBar, setOpenSideBar] = useState(false);
   // const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,33 +44,16 @@ function SingIn() {
     });
   };
   return (
-    <Wrapper onSubmit={handleSubmit}>
-      <FormField
-        name="email"
-        id="email"
-        value={loginValues.email}
-        type="text"
-        placeholder="Wprowadź e-mail"
-        onChange={handleInputChange}
-        htmlFor="email"
-        label="Adres e-mail:"
+    <Wrapper>
+      <QuickLogin handleInputChange={handleInputChange} handleSubmit={handleSubmit} loginValues={loginValues} />
+      <StyledLink onClick={() => setOpenSideBar(!openSideBar)}>Przypomnij hasło</StyledLink>
+      <StyledLink onClick={() => setOpenSideBar(!openSideBar)}>Zarejestruj się</StyledLink>
+      <SideBar
+        isOpen={openSideBar}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+        loginValues={loginValues}
       />
-      <FormField
-        name="password"
-        id="password"
-        value={loginValues.password}
-        type="text"
-        placeholder="password"
-        onChange={handleInputChange}
-        htmlFor="Wprowadź hasło"
-        label="Hasło:"
-      />
-      <Button isBig={false} type="submit">
-        Zaloguj
-      </Button>
-      <StyledLink></StyledLink>
-      <StyledLink>Przypomnij hasło</StyledLink>
-      <StyledLink>Zarejestruj się</StyledLink>
     </Wrapper>
   );
 }

@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormFieldProps } from '../SignIn/SignIn';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;

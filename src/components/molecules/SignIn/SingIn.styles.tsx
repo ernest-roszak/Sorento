@@ -1,11 +1,9 @@
 import { Button } from 'components/atoms/Button/Button';
 import styled from 'styled-components';
-import { Title } from 'components/atoms/Title/Title';
 
-export const Wrapper = styled.form`
-  display: grid;
-  grid-template-columns: 160px 160px 120px;
-  grid-template-rows: 70% 30%;
+export const Form = styled.form`
+  display: flex;
+  grid-area: header;
   ${Button} {
     margin-top: 21px;
     cursor: pointer;
@@ -17,11 +15,32 @@ export const Wrapper = styled.form`
   }
 `;
 
-export const StyledLink = styled.span`
+export const Wrapper = styled.div`
+  display: grid;
+  /* grid-template-columns: 160px 160px 120px;
+  grid-template-rows: 70% 30%; */
+  grid-template-areas:
+    ' header header'
+    ' main main';
+  justify-items: flex-end;
+`;
+
+export const StyledLink = styled.button`
   font-weight: bold;
+  background: none;
+  outline: none;
+  border: none;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.white2};
-  text-align: left;
   font-size: ${({ theme }) => theme.fontSize.s};
   text-align: center;
+  max-width: 125px;
+  cursor: pointer;
+  margin-top: -10px;
+  margin-right: 5px;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.green};
+    border-radius: 8px;
+  }
 `;

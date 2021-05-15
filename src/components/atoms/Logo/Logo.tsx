@@ -3,11 +3,7 @@ import logoSorento from 'assets/logos/LOGO_SORENTO.png';
 import { StyledLogo } from './Logo.styles';
 
 const Logo = () => {
-  return (
-    <StyledLogo>
-      <img src={logoSorento} alt="Sorento" />
-    </StyledLogo>
-  );
+  return <StyledLogo src={logoSorento} alt="Sorento" />;
 };
 
 export default Logo;
