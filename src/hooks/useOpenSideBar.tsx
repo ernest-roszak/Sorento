@@ -47,7 +47,5 @@ export const useOpenSideBar = () => {
     handleForgotPasswordOptionOpen,
     handleLoginOptionOpen,
     isSideBarOptionOpen,
-    allOptionsClose,
-    setSideBarOptionOpen,
   };
 };
