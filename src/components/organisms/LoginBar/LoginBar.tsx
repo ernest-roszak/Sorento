@@ -1,7 +1,7 @@
 import Logo from 'components/atoms/Logo/Logo';
+import Logout from 'components/molecules/Logout/Logout';
 import SingIn from 'components/molecules/SignIn/SignIn';
-import React from 'react';
-
+import { useAuth } from 'hooks/useAuth';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -14,10 +14,13 @@ export const Wrapper = styled.div`
 `;
 
 const LoginBar = () => {
+  const { currentUser }: any = useAuth();
+  console.log(currentUser);
+
   return (
     <Wrapper>
       <Logo />
-      <SingIn />
+      {currentUser ? <Logout /> : <SingIn />}
     </Wrapper>
   );
 };
