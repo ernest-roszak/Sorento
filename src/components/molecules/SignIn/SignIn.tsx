@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import { auth } from '../../../firebase';
 import { Wrapper, StyledLink } from './SingIn.styles';
-import SideBar from 'views/SideBar/SideBar';
-import QuickLogin from '../QucikLogin/QuickLogin';
-
-function login(email: string, password: string) {
-  return auth.signInWithEmailAndPassword(email, password);
-}
+import SideBar from 'components/organisms/SideBar/SideBar';
+import QuickLogin from '../QuickLogin/QuickLogin';
+import { useAuth } from 'hooks/useAuth';
 
 export interface FormFieldProps {
   name: string;
@@ -19,24 +15,30 @@ export interface FormFieldProps {
   label: string;
 }
 
+export interface LoginValues {
+  email: string;
+  password: string;
+}
+
 function SingIn() {
   const [loginValues, setLoginValues] = useState({
     email: 'test@gmail.com',
-    password: 'test123',
+    password: 'test1234',
   });
   const [openSideBar, setOpenSideBar] = useState(false);
   // const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
+  const { login }: any = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log(loginValues.password, loginValues.email);
     try {
-      const result = await login(loginValues.email, loginValues.password);
-      console.log(result);
+      const result = await login(loginValues);
     } catch {
       console.log('błąd');
     }
   };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginValues({
       ...loginValues,

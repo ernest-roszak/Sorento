@@ -1,10 +1,12 @@
 import { Button } from 'components/atoms/Button/Button';
 import app, { auth } from '../../../firebase';
-import React, { useReducer } from 'react';
+import React from 'react';
 import FormField from '../FormField/FormField';
 import { SidebarFormField } from './Registration.styles';
+import useForm from 'hooks/useForm';
+import { useAuth } from 'hooks/useAuth';
 
-interface IRegistrationFormState {
+export interface IRegistrationFormState {
   email: string;
   password: string;
   repeatPassword: string;
@@ -12,13 +14,6 @@ interface IRegistrationFormState {
   lastName: string;
   street: string;
 }
-
-// interface IActionTypes {
-//   type: string;
-//   value?: string;
-//   field: string;
-//   initialState?: IRegistrationFormState;
-// }
 
 const initialState = {
   email: 'test6@gmail.com',
@@ -29,72 +24,16 @@ const initialState = {
   street: 'Street',
 };
 
-const actionTypes = {
-  inputChange: 'INPUT CHANGE',
-  clearForm: 'CLEAR FORM',
-};
-
-const reducer = (state: IRegistrationFormState, action: any) => {
-  switch (action.type) {
-    case actionTypes.inputChange:
-      return {
-        ...state,
-        [action.field]: action.value,
-      };
-    case actionTypes.clearForm:
-      return {
-        ...action.initialState,
-      };
-  }
-};
-
-function signup(formValue: IRegistrationFormState) {
-  return auth
-    .createUserWithEmailAndPassword(formValue.email, formValue.password)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      if (user) {
-        console.log('JEST', user);
-        writeUserData(formValue, user.uid);
-      }
-      console.log('user', user);
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
-}
-
-function writeUserData(formValue: IRegistrationFormState, userId: string) {
-  app
-    .database()
-    .ref('users/' + userId)
-    // .user(userId)
-    .set({
-      name: formValue.name,
-      email: formValue.email,
-      lastName: formValue.lastName,
-      street: formValue.street,
-    });
-}
-
 const Registration = () => {
-  const [formValue, dispatch] = useReducer(reducer, initialState);
+  const { formValue, handleInputChange, handleThrowError } = useForm(initialState);
+  const { signUp }: any = useAuth();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      field: e.target.name,
-      value: e.target.value,
-      type: actionTypes.inputChange,
-    });
-  };
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    signup(formValue);
-    dispatch({ type: actionTypes.clearForm, initialState });
+    if (formValue.password !== formValue.repeatPassword) {
+      return handleThrowError('Podane hasła nie są identyczne. Spróbuj jeszcze raz.');
+    }
+    await signUp(formValue);
   };
   return (
     <SidebarFormField as="form" onSubmit={handleSubmit}>
@@ -128,6 +67,7 @@ const Registration = () => {
         htmlFor="repeatPassword"
         label="Powtórz:"
       />
+      {formValue.error}
       <FormField
         name="name"
         id="name"
