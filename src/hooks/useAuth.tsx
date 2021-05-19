@@ -8,6 +8,7 @@ const AuthContext = React.createContext({});
 
 export const AuthProvider: FC = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,9 +16,33 @@ export const AuthProvider: FC = ({ children }) => {
       setCurrentUser(user);
       setLoading(false);
     });
+    if (currentUser) {
+      getUserDetails(currentUser);
+      console.log('userDetails', userDetails);
+    }
 
     return unsubscribe;
   }, []);
+
+  const getUserDetails = (currentUser: any) => {
+    if (currentUser !== null) {
+      const dbRef = app.database().ref();
+      dbRef
+        .child('User')
+        .child(currentUser.uid)
+        .get()
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setUserDetails(snapshot.val());
+          } else {
+            console.log('No data available');
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
 
   function login(loginValues: LoginValues) {
     return auth.signInWithEmailAndPassword(loginValues.email, loginValues.password);
@@ -65,6 +90,7 @@ export const AuthProvider: FC = ({ children }) => {
         email: formValue.email,
         lastName: formValue.lastName,
         street: formValue.street,
+        phoneNumber: formValue.phoneNumber,
       });
   }
 
@@ -74,6 +100,7 @@ export const AuthProvider: FC = ({ children }) => {
     logout,
     resetPassword,
     signUp,
+    userDetails,
     // updateEmail,
     // updatePassword,
   };
