@@ -2,7 +2,7 @@ import app, { auth } from '../firebase';
 
 import React, { useContext, useEffect, useState, FC } from 'react';
 import { IRegistrationFormState } from 'components/molecules/Registration/Registration';
-import { LoginValues } from 'components/molecules/SignIn/SignIn';
+import { ILoginValues } from 'components/molecules/SignIn/SignIn';
 
 const AuthContext = React.createContext({});
 
@@ -16,13 +16,16 @@ export const AuthProvider: FC = ({ children }) => {
       setCurrentUser(user);
       setLoading(false);
     });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
     if (currentUser) {
       getUserDetails(currentUser);
       console.log('userDetails', userDetails);
     }
-
-    return unsubscribe;
-  }, []);
+  }, [currentUser]);
 
   const getUserDetails = (currentUser: any) => {
     if (currentUser !== null) {
@@ -44,7 +47,7 @@ export const AuthProvider: FC = ({ children }) => {
     }
   };
 
-  function login(loginValues: LoginValues) {
+  function login(loginValues: ILoginValues) {
     return auth.signInWithEmailAndPassword(loginValues.email, loginValues.password);
   }
   function logout() {

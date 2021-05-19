@@ -31,7 +31,7 @@ const Logout = () => {
 
   return (
     <Wrapper>
-      <Title>Witaj {userDetails.name}</Title>
+      <Title>Witaj {userDetails && userDetails.name}</Title>
       <Button isBig={false} onClick={handleLogout}>
         Wyloguj
       </Button>
