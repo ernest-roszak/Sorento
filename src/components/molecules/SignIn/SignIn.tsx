@@ -3,6 +3,7 @@ import { Wrapper, StyledLink } from './SingIn.styles';
 import SideBar from 'components/organisms/SideBar/SideBar';
 import QuickLogin from '../QuickLogin/QuickLogin';
 import { useAuth } from 'hooks/useAuth';
+import { useOpenSideBar } from 'hooks/useOpenSideBar';
 
 export interface FormFieldProps {
   name: string;
@@ -28,12 +29,12 @@ function SingIn() {
   const [openSideBar, setOpenSideBar] = useState(false);
   // const [currentUser, setCurrentUser] = useState<firebase.User | null>(null);
   const { login }: any = useAuth();
+  const { handleForgotPasswordOptionOpen } = useOpenSideBar();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(loginValues.password, loginValues.email);
     try {
-      const result = await login(loginValues);
+      await login(loginValues);
     } catch {
       console.log('błąd');
     }
@@ -45,10 +46,15 @@ function SingIn() {
       [e.target.name]: e.target.value,
     });
   };
+  const handleForgotPassword = () => {
+    setOpenSideBar(!openSideBar);
+    handleForgotPasswordOptionOpen();
+  };
   return (
     <Wrapper>
       <QuickLogin handleInputChange={handleInputChange} handleSubmit={handleSubmit} loginValues={loginValues} />
-      <StyledLink onClick={() => setOpenSideBar(!openSideBar)}>Przypomnij hasło</StyledLink>
+
+      <StyledLink onClick={handleForgotPassword}>Przypomnij hasło</StyledLink>
       <StyledLink onClick={() => setOpenSideBar(!openSideBar)}>Zarejestruj się</StyledLink>
       <SideBar
         isOpen={openSideBar}
