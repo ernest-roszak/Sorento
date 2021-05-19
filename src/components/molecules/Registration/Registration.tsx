@@ -13,15 +13,17 @@ export interface IRegistrationFormState {
   name: string;
   lastName: string;
   street: string;
+  phoneNumber: number;
 }
 
 const initialState = {
-  email: 'test6@gmail.com',
+  email: 'test@gmail.com',
   password: 'test1234',
   repeatPassword: 'test1234',
   name: 'Ernest',
   lastName: 'Roszak',
   street: 'Street',
+  phoneNumber: 5434253623633,
 };
 
 const Registration = () => {
