@@ -3,7 +3,7 @@ import app, { auth } from '../../../firebase';
 import React from 'react';
 import FormField from '../FormField/FormField';
 import { SidebarFormField } from './Registration.styles';
-import useForm from 'hooks/useForm';
+import useForm from 'hooks/useRegistrationForm';
 import { useAuth } from 'hooks/useAuth';
 
 export interface IRegistrationFormState {
