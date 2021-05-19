@@ -22,7 +22,7 @@ export interface ILoginValues {
   password: string;
 }
 
-const initialState = {
+const initialState: ILoginValues = {
   email: 'test@gmail.com',
   password: 'test1234',
 };

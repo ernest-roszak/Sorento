@@ -3,6 +3,8 @@ import { SideBarButton, SideBarWrapper } from './SideBar.styles';
 import Registration from 'components/molecules/Registration/Registration';
 import QuickLogin from 'components/molecules/QuickLogin/QuickLogin';
 import { useOpenSideBar } from 'hooks/useOpenSideBar';
+import React from 'react';
+import ForgotPassword from 'components/molecules/ForgotPassword/ForgotPassword';
 
 const SideBar = ({ isOpen, handleInputChange, handleSubmit, loginValues }: any) => {
   const { handleRegistrationOptionOpen, handleForgotPasswordOptionOpen, handleLoginOptionOpen, isSideBarOptionOpen } =
@@ -17,7 +19,7 @@ const SideBar = ({ isOpen, handleInputChange, handleSubmit, loginValues }: any) 
         <QuickLogin handleInputChange={handleInputChange} handleSubmit={handleSubmit} loginValues={loginValues} />
       ) : null}
       <SideBarButton onClick={handleForgotPasswordOptionOpen}>Przypomnienie hasła</SideBarButton>
-      {isSideBarOptionOpen.isForgotPasswordOpen ? <Registration /> : null}
+      {isSideBarOptionOpen.isForgotPasswordOpen ? <ForgotPassword /> : null}
     </SideBarWrapper>
   );
 };

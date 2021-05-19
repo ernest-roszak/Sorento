@@ -1,7 +1,7 @@
 import { ILoginValues } from 'components/molecules/SignIn/SignIn';
 import React, { useState } from 'react';
 
-const useForm = (initialState: ILoginValues) => {
+const useForm = (initialState: any) => {
   const [formValues, setFormValues] = useState(initialState);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
