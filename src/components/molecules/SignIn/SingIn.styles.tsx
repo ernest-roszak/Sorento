@@ -32,7 +32,7 @@ export const StyledLink = styled.button`
   border: none;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.white2};
-  font-size: ${({ theme }) => theme.fontSize.s};
+  font-size: ${({ theme }) => theme.fontSize.m};
   text-align: center;
   max-width: 125px;
   cursor: pointer;
