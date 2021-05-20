@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   background: ${({ theme }) => theme.colors.black};
-  height: 85px;
+  height: ${({ theme }) => theme.spaces.loginBarHeight};
   width: 100%;
   overflow-x: scroll;
   display: flex;

@@ -10,7 +10,7 @@ export const SideBarWrapper = styled.div<{ isOpen: boolean }>`
   height: 100vh;
   background: ${({ theme }) => theme.colors.black};
   position: absolute;
-  top: 85px;
+  top: ${({ theme }) => theme.spaces.loginBarHeight};
   right: 0px;
   transform: ${({ isOpen }) => (isOpen ? 'translateX(0%)' : 'translateX(100%)')};
   color: white;
