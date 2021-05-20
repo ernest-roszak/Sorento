@@ -26,7 +26,7 @@ const ForgotPassword = () => {
       setMessage('');
       setError('');
       setLoading(true);
-      await resetPassword(formValues);
+      await resetPassword(formValues.email);
       setMessage('Check your inbox for further instructions');
     } catch {
       setError('Failed to reset password');
