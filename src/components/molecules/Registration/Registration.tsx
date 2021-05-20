@@ -100,6 +100,16 @@ const Registration = () => {
         htmlFor="street"
         label="Ulica:"
       />
+      <FormField
+        name="city"
+        id="city"
+        value={formValue.city}
+        type="text"
+        placeholder="Wprowadź miejscowość"
+        onChange={handleInputChange}
+        htmlFor="city"
+        label="Miejscowość:"
+      />
 
       <Button isBig={false} type="submit">
         Zarejestruj
