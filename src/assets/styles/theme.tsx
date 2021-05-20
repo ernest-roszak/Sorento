@@ -21,4 +21,7 @@ export const theme: DefaultTheme = {
     m: '12px',
     s: '11px',
   },
+  spaces: {
+    loginBarHeight: '85px',
+  },
 };

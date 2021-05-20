@@ -24,5 +24,8 @@ export interface DefaultTheme {
     m: string;
     s: string;
   };
+  spaces: {
+    loginBarHeight: string;
+  };
 }
 // }
