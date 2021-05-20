@@ -1,5 +1,5 @@
 import React from 'react';
-import banner from 'assets/banners/BANERY_MALE_CATERING.jpg';
+import banner from 'assets/banners/BANER_3.jpg';
 import styled from 'styled-components';
 
 const BannerImage = styled.img`
