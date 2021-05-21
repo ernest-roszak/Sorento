@@ -1,8 +1,10 @@
-import Logo from 'components/atoms/Logo/Logo';
+// import Logo from 'components/atoms/Logo/Logo';
+import { IconButton } from '@material-ui/core';
 import Logout from 'components/molecules/Logout/Logout';
 import SingIn from 'components/molecules/SignIn/SignIn';
 import { useAuth } from 'hooks/useAuth';
 import styled from 'styled-components';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 export const Wrapper = styled.div`
   background: ${({ theme }) => theme.colors.black};
@@ -19,7 +21,10 @@ const LoginBar = () => {
 
   return (
     <Wrapper>
-      <Logo />
+      {/* <Logo /> */}
+      <IconButton color="primary" aria-label="add to shopping cart">
+        <AddShoppingCartIcon />
+      </IconButton>
       {currentUser ? <Logout /> : <SingIn />}
     </Wrapper>
   );
